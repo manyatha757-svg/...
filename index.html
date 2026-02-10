@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Quest 🎉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fde2e4, #e0c3fc, #d0f4de);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    h1 {
+      color: #6a4c93;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      background: #ffafcc;
+      color: #333;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ffc8dd;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #ff5d8f;
+    }
+
+    #nextBtn {
+      display: none;
+      margin-top: 25px;
+      background: #bde0fe;
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 400px;
+      text-align: center;
+      animation: pop 0.8s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h2>Happy Birthday!!! 🎉🎂</h2>
+    <p>
+      Please don’t be mad at me 🥺<br>
+      This was made with love, chaos, and very little brain power.<br>
+      It’s not perfect, but it’s from me ❤️<br>
+      Ik it’s not that great… but it’s from me.<br><br>
+      <strong>Ready?</strong>
+    </p>
+    <button onclick="closePopup()">Let’s go 😌</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <h1>Answer honestly 😏</h1>
+  <p id="question"></p>
+
+  <input type="text" id="answer" placeholder="Your answer here">
+  <button onclick="checkAnswer()">Submit</button>
+
+  <div class="message" id="msg"></div>
+
+  <button id="nextBtn" onclick="goNext()">Go to next level 🎮</button>
+</div>
+
+<script>
+  const questions = [
+    { q: "What is the next number? 1,1,2,3,5,8, ?", a: "13", w: "Sheldon’s already judging you 👀" },
+    { q: "One affirmative trait of your best friend (that is me) that you admire...", a: "any" },
+    { q: "What is Sheldon’s favorite number?", a: "73", w: "Bazinga! That’s not it." },
+    { q: "What is Penny’s last name in the early seasons?", a: "teller", w: "The answer’s Teller 😌" },
+    { q: "When is your best friend’s birthday?", a: "any" },
+    { q: "Name the color you and your best friend chose for farewell", a: "teal" },
+    { q: "What is the name of Phoebe's twin?", a: "ursula" },
+    { q: "Number of isomers of pentane", a: "3" }
+  ];
+
+  let i = 0;
+
+  const qEl = document.getElementById("question");
+  const msg = document.getElementById("msg");
+
+  function loadQ() {
+    qEl.textContent = questions[i].q;
+    document.getElementById("answer").value = "";
+    msg.textContent = "";
+  }
+
+  loadQ();
+
+  function checkAnswer() {
+    const userAns = document.getElementById("answer").value.toLowerCase().trim();
+    const correct = questions[i].a;
+
+    if (correct === "any" || userAns === correct) {
+      msg.textContent = "Correct 😌";
+      i++;
+      if (i < questions.length) {
+        setTimeout(loadQ, 800);
+      } else {
+        document.getElementById("nextBtn").style.display = "block";
+        msg.textContent = "You made it 😏";
+      }
+    } else {
+      msg.textContent = questions[i].w || "Try again 👀";
+    }
+  }
+
+  function goNext() {
+    window.location.href = "maze.html";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
