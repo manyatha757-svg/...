@@ -1,182 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Maze Challenge 🧠</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #fde2e4, #e0c3fc, #d0f4de);
-      font-family: 'Poppins', sans-serif;
-    }
-
-    h1 {
-      color: #6a4c93;
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin-bottom: 15px;
-      color: #444;
-    }
-
-    .maze {
-      display: grid;
-      grid-template-columns: repeat(7, 60px);
-      grid-template-rows: repeat(7, 60px);
-      gap: 4px;
-      background: #fff;
-      padding: 15px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    }
-
-    .cell {
-      width: 60px;
-      height: 60px;
-      background: #ffc8dd;
-      border-radius: 10px;
-    }
-
-    .wall {
-      background: #bde0fe;
-    }
-
-    .player {
-      background-image: url("face.png");
-      background-size: cover;
-      background-position: center;
-      border-radius: 50%;
-    }
-
-    .goal {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      background: #d0f4de;
-    }
-
-    #win {
-      display: none;
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      background: #ffafcc;
-      cursor: pointer;
-      font-size: 16px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <h1>Maze Time 😏</h1>
-  <p>Use arrow keys ⬅️⬆️⬇️➡️ to reach the cake 🎂</p>
-
-  <div class="maze" id="maze"></div>
-
-  <div id="win">
-    <h2>🎉 Bazinga!! You did it 🎉</h2>
-    <p>You earned the cake 😌🎂</p>
-    <button onclick="goNext()">Continue 💖</button>
-  </div>
-
 <script>
-  const mazeLayout = [
-    "P.....#",
-    "###.##.#",
-    "...#...#",
-    "#.#.#.##",
-    "#.#...#.",
-    "#.###.#G",
-    "#.....##"
-  ];
-
+  const player = document.getElementById("player");
   const maze = document.getElementById("maze");
-  let playerPos = { x: 0, y: 0 };
 
-  function drawMaze() {
-    maze.innerHTML = "";
-    mazeLayout.forEach((row, y) => {
-      row.split("").forEach((cell, x) => {
-        const div = document.createElement("div");
-        div.classList.add("cell");
+  let x = 0;
+  let y = 0;
+  const step = 20;
 
-        if (cell === "#") div.classList.add("wall");
-        if (cell === "P") {
-          div.classList.add("player");
-          playerPos = { x, y };
-        }
-        if (cell === "G") {
-          div.classList.add("goal");
-          div.textContent = "🎂";
-        }
+  const maxX = maze.clientWidth - 30; // player size
+  const maxY = maze.clientHeight - 30;
 
-        maze.appendChild(div);
-      });
-    });
-  }
+  function movePlayer(e) {
+    if (e.key === "ArrowRight") x += step;
+    if (e.key === "ArrowLeft") x -= step;
+    if (e.key === "ArrowDown") y += step;
+    if (e.key === "ArrowUp") y -= step;
 
-  drawMaze();
+    // 🚧 boundary check
+    x = Math.max(0, Math.min(x, maxX));
+    y = Math.max(0, Math.min(y, maxY));
 
-  document.addEventListener("keydown", e => {
-    const moves = {
-      ArrowUp: { x: 0, y: -1 },
-      ArrowDown: { x: 0, y: 1 },
-      ArrowLeft: { x: -1, y: 0 },
-      ArrowRight: { x: 1, y: 0 }
-    };
+    player.style.left = x + "px";
+    player.style.top = y + "px";
 
-    if (!moves[e.key]) return;
-
-    const nx = playerPos.x + moves[e.key].x;
-    const ny = playerPos.y + moves[e.key].y;
-
-    if (
-      ny < 0 || ny >= mazeLayout.length ||
-      nx < 0 || nx >= mazeLayout[0].length ||
-      mazeLayout[ny][nx] === "#"
-    ) return;
-
-    if (mazeLayout[ny][nx] === "G") {
-      document.getElementById("win").style.display = "block";
+    // 🎂 win condition
+    if (x >= maxX - 10 && y >= maxY - 10) {
+      alert("Bazinga!! You got the cake 🎂😌");
+      window.location.href = "fun.html";
     }
-
-    mazeLayout[playerPos.y] =
-      mazeLayout[playerPos.y].substring(0, playerPos.x) + "." +
-      mazeLayout[playerPos.y].substring(playerPos.x + 1);
-
-    mazeLayout[ny] =
-      mazeLayout[ny].substring(0, nx) + "P" +
-      mazeLayout[ny].substring(nx + 1);
-
-    drawMaze();
-  });
-
-  function goNext() {
-    window.location.href = "fun.html";
   }
+
+  document.addEventListener("keydown", movePlayer);
 </script>
-  <a href="fun.html">
-  <button style="padding:12px 25px; font-size:18px; cursor:pointer;">
-    Next 😌
-  </button>
-</a>
-
-
-</body>
-</html>
