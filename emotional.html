@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You 🤍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fde2e4, #e0c3fc, #d0f4de);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.88);
+      padding: 40px 30px;
+      max-width: 850px;
+      border-radius: 22px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      animation: fadeIn 1.5s ease;
+    }
+
+    h1 {
+      text-align: center;
+      color: #6a4c93;
+      margin-bottom: 25px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 16px;
+    }
+
+    .signature {
+      text-align: right;
+      margin-top: 35px;
+      font-weight: 600;
+      color: #6a4c93;
+    }
+
+    .next-btn {
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 15px;
+      background: #ffafcc;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .next-btn:hover {
+      background: #ffc8dd;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      animation: fall 5s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>🤍</h1>
+
+    <p>You're a gorgeous person.. always be that guy who always helps people selflessly.. you're wonderful..  
+    Happiest birthday to my favourite person, my best friend Ashweeeeen!!</p>
+
+    <p>You don't know this ...but you're a really really important person in my life...  
+    I wanna thank you for being in my life ..idk what I would've done without you in it ( would hv been hit by a gaadi and been dead by now fs😂)..</p>
+
+    <p>Thank you for being my bestfriend, someone I can tell anything and everything to, a person who's always stayed and been there for me ...  
+    tbh you're the first bestfriend I've gotten and I think I'm lucky enough to have gotten the best one..</p>
+
+    <p>Every moment I've spent with you is a memory..  
+    u've always give a different pov for me to look at things and hv given me hope when I hv not believed in myself...</p>
+
+    <p>I'm really lucky and thankful for having you in life..tbh..  
+    there's soo much I wanna say but I don't really hv the words rn..</p>
+
+    <p>and I'm actually really really sorry..  
+    firstly cuz ur bestfriend is dumb and makes u wait at the bus stop and also is soo boring that she makes u miss out most of the fun ...  
+    also there has been times where this bitch was not by ur side and I'm really sorry..</p>
+
+    <p>but I'm really sorry and wanna tell that ur very important in my life ..  
+    i didn't want tell this but everytime u say "usharu" a younger part of me that was dead comes back ....  
+    it gives me a reassurance that how much ever i fuck up .. eod my bestfriend is there for me to tell "everything's fine"</p>
+
+    <p>In short.. thank you for existing in my life and being the best thing about it  
+    and I'm sorry for you cuz I'm dumb and boring .</p>
+
+    <p>Ik i have not always been the bestfriend you deserved but i wanna promise that ..  
+    even if a hundred people come into my life none of them can be YOU...  
+    my bestestestest friend !!!</p>
+
+    <p>And I want you to know that I'll always be there for you and I'll always care about you ...  
+    and I'm not saying this just cuz it's your birthday but I'll always say this ..  
+    I care alott abt you and love you lotss!! ( Ofc as a frnd) ...</p>
+
+    <p>In the end happy birthday</p>
+
+    <div class="signature">~ Manyathaaa 💕</div>
+
+    <button class="next-btn" onclick="goNext()">One last thing 🎓💖</button>
+  </div>
+
+  <!-- Confetti -->
+  <script>
+    for (let i = 0; i < 60; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor =
+        ['#ffafcc', '#cdb4db', '#bde0fe', '#ffc8dd'][Math.floor(Math.random() * 4)];
+      confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(confetti);
+    }
+
+    function goNext() {
+      window.location.href = "certificate.html";
+    }
+  </script>
+
+</body>
+</html>
