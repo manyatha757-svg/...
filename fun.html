@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday 🎉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fde2e4, #e0c3fc, #d0f4de);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255,255,255,0.9);
+      padding: 40px 30px;
+      border-radius: 25px;
+      max-width: 800px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      animation: fadeIn 1.5s ease;
+    }
+
+    h1 {
+      color: #6a4c93;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .next-btn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 15px;
+      background: #ffafcc;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .next-btn:hover {
+      background: #ffc8dd;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Balloons */
+    .balloon {
+      position: fixed;
+      bottom: -100px;
+      font-size: 40px;
+      animation: floatUp 10s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      to { transform: translateY(-120vh); }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      animation: fall 5s linear infinite;
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh) rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>🎉 Happy 18th 🎉</h1>
+
+    <p><strong>Bazinga!! You cracked them all 😌!!</strong></p>
+
+    <p>Happiesttt birthday Ashweeeeeen!!!</p>
+
+    <p>Always be your gorgeous self you are..</p>
+
+    <p>
+      Happy Birthday to the only person who’s seen me at my worst  
+      and still chose to stay.
+    </p>
+
+    <p>Happy Birthday to my best friend ❤️</p>
+
+    <p>
+      Thank you for being my safe place, my biggest support,  
+      and my favorite human.
+    </p>
+
+    <p>I wish you all the happiness and good luck....love you lots!!</p>
+
+    <button class="next-btn" onclick="goNext()">One more thing 💗</button>
+  </div>
+
+  <!-- Balloons -->
+  <div class="balloon" style="left:10%;">🎈</div>
+  <div class="balloon" style="left:30%; animation-delay:2s;">🎈</div>
+  <div class="balloon" style="left:60%; animation-delay:4s;">🎈</div>
+  <div class="balloon" style="left:80%; animation-delay:1s;">🎈</div>
+
+  <!-- Confetti -->
+  <script>
+    for (let i = 0; i < 70; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor =
+        ['#ffafcc', '#cdb4db', '#bde0fe', '#ffc8dd'][Math.floor(Math.random() * 4)];
+      confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(confetti);
+    }
+
+    function goNext() {
+      window.location.href = "emotional.html";
+    }
+  </script>
+
+</body>
+</html>
