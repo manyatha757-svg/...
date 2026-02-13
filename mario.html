@@ -85,7 +85,9 @@
 </head>
 
 <body>
-
+<audio id="bgMusic" loop>
+  <source src="birthday-music.mp3" type="audio/mpeg">
+</audio>
 <div id="game">
   <div class="ground"></div>
 
@@ -107,6 +109,16 @@
 </div>
 
 <script>
+  const music = document.getElementById("bgMusic");
+let musicStarted = false;
+
+function startMusic() {
+  if (!musicStarted) {
+    music.play();
+    music.volume = 0.4;
+    musicStarted = true;
+  }
+  }
   const player = document.getElementById("player");
   const age17 = document.getElementById("age17");
   const age18 = document.getElementById("age18");
@@ -123,6 +135,7 @@
   const groundLevel = 120;
 
   function moveRight() {
+    startMusic();
     position += 15;
     player.style.left = position + "px";
     checkCollision();
@@ -130,6 +143,7 @@
   }
 
   function jump() {
+    startMusic();
     if (!isJumping) {
       velocity = 15;
       isJumping = true;
@@ -184,6 +198,7 @@
   }
 
   document.addEventListener("keydown", function(e) {
+    startMusic();
     if (e.key === "ArrowRight") moveRight();
     if (e.key === "ArrowUp") jump();
   });
