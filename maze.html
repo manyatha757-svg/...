@@ -2,9 +2,11 @@
 <html>
 <head>
   <title>Maze 🎂</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
-      background: #fceef5;
+      background: #fde2f3;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -12,97 +14,127 @@
       height: 100vh;
       font-family: Arial, sans-serif;
       text-align: center;
+      margin: 0;
+    }
+
+    h2 {
+      margin-bottom: 15px;
     }
 
     #maze {
+      position: relative;
       width: 300px;
       height: 300px;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: repeat(6, 1fr);
-      gap: 3px;
-      background: #ffd6e8;
-      padding: 5px;
+      background: white;
+      border: 4px solid #ffb6d9;
       border-radius: 20px;
+      overflow: hidden;
     }
 
-    .cell {
-      background: white;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    #player {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      top: 10px;
+      left: 10px;
+      transition: 0.08s;
+    }
+
+    #goal {
+      position: absolute;
+      font-size: 28px;
+      right: 10px;
+      bottom: 10px;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    .controls button {
       font-size: 22px;
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 10px;
+      background: #ffb6d9;
       cursor: pointer;
     }
 
-    .player {
-      background: #ffb6c1;
-    }
-
-    .goal {
-      background: #fff0f5;
+    .controls button:active {
+      background: #ff99cc;
     }
   </style>
 </head>
+
 <body>
 
-<h2>Help him reach the cake 🎂</h2>
+<h2>Reach the cake 🎂</h2>
 
-<div id="maze"></div>
+<div id="maze">
+  <div id="player">
+    <img src="share_1769268911848.png" width="30">
+  </div>
+  <div id="goal">🎂</div>
+</div>
+
+<div class="controls">
+  <div>
+    <button onclick="move('up')">⬆️</button>
+  </div>
+  <div>
+    <button onclick="move('left')">⬅️</button>
+    <button onclick="move('down')">⬇️</button>
+    <button onclick="move('right')">➡️</button>
+  </div>
+</div>
 
 <script>
+  const player = document.getElementById("player");
   const maze = document.getElementById("maze");
-  const size = 6;
-  let playerPos = 0;
-  const goalPos = 35;
 
-  function createMaze() {
-    for (let i = 0; i < size * size; i++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
+  let x = 10;
+  let y = 10;
+  const step = 15;
 
-      if (i === playerPos) {
-        cell.classList.add("player");
-        cell.innerHTML = "<img src='face.png' width='25'>";
-      }
+  function move(direction) {
+    let newX = x;
+    let newY = y;
 
-      if (i === goalPos) {
-        cell.classList.add("goal");
-        cell.innerHTML = "🎂";
-      }
+    if (direction === "right") newX += step;
+    if (direction === "left") newX -= step;
+    if (direction === "down") newY += step;
+    if (direction === "up") newY -= step;
 
-      cell.addEventListener("click", () => move(i));
-      maze.appendChild(cell);
+    // boundaries
+    if (
+      newX >= 0 &&
+      newY >= 0 &&
+      newX <= maze.clientWidth - 30 &&
+      newY <= maze.clientHeight - 30
+    ) {
+      x = newX;
+      y = newY;
+      player.style.left = x + "px";
+      player.style.top = y + "px";
+    }
+
+    // win condition
+    if (x > 240 && y > 240) {
+      setTimeout(() => {
+        alert("Bazinga!! You reached the cake 🎂😌");
+        window.location.href = "fun.html";
+      }, 200);
     }
   }
 
-  function move(index) {
-    const row = Math.floor(playerPos / size);
-    const col = playerPos % size;
-
-    const newRow = Math.floor(index / size);
-    const newCol = index % size;
-
-    const isAdjacent =
-      (row === newRow && Math.abs(col - newCol) === 1) ||
-      (col === newCol && Math.abs(row - newRow) === 1);
-
-    if (isAdjacent) {
-      playerPos = index;
-      maze.innerHTML = "";
-      createMaze();
-
-      if (playerPos === goalPos) {
-        setTimeout(() => {
-          alert("Bazinga!! You reached the cake 🎂😌");
-          window.location.href = "fun.html";
-        }, 300);
-      }
-    }
-  }
-
-  createMaze();
+  // Keyboard support
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") move("right");
+    if (e.key === "ArrowLeft") move("left");
+    if (e.key === "ArrowDown") move("down");
+    if (e.key === "ArrowUp") move("up");
+  });
 </script>
 
 </body>
